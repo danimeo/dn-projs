@@ -1,0 +1,30 @@
+<div class="container">
+	<div class="column">
+	<span class="label" style="font-size: 10pt; ">
+		{{ date }}
+	</span>
+	</div>
+	{% for item in lst %}
+	<div class="column">
+        <span class="label">
+			<span style="font-size: 12pt; ">
+			{{ item.id }}. 
+			</span>
+            <span style="font-size: 12pt; font-weight: bold;">
+                {{ item.text }} 
+				
+				{% if item.value==true %}                    
+				[ √ ]		
+				{% else %}							
+				[&nbsp;&nbsp;&nbsp;&nbsp;]	
+				{% endif %}	
+			</span>
+			<br />
+			<span style="font-size: 8pt;">
+				{{ item.date }}
+			</span>
+			
+        </span>
+    </div>
+	{% endfor %}
+</div>

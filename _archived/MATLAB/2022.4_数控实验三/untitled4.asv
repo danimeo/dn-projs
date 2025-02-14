@@ -1,0 +1,30 @@
+clc, clear, close all
+
+f = 0;
+p0 = num2cell(input('[X0, Y0]: '));
+pe = num2cell(input('[Xe, Ye]: '));
+[x0, y0] = deal(p0{:});
+[xe, ye] = deal(pe{:});
+
+plot([x0, xe], [y0, ye], 'LineWidth', 2);
+hold on;
+grid on;
+set(gca,'XLim',[-10 10]);  % X轴的数据显示范围
+set(gca,'XTick',-10:1:10);  % 设置要显示的坐标刻度
+set(gca,'YLim',[-10 10]);  % Y轴的数据显示范围
+set(gca,'YTick',-10:1:10);  % 设置要显示的坐标刻度
+
+p = [x0, y0];
+E = [xe-x0, ye-y0];
+d = double(sign(E) | 1);
+e = [- abs(E(2)), abs(E(1))];
+
+while abs(xe - p(1)) + abs(ye - p(2)) ~= 0
+    i = (f<0)+1;
+    p(i) = p(i) + d(i);
+    D
+    f = f + e(i);
+    plot([x-dx, p(1)], [y-dy, p(2)], 'LineWidth', 2);
+    fprintf('x=%d, y=%d, dx=%d, dy=%d, f=%d\n', x, y, dx, dy, f);
+    pause(0.25)
+end

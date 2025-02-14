@@ -1,0 +1,41 @@
+@page {
+    width: 72mm;
+    height: 100mm;
+    padding: 1mm;
+    
+}
+
+img {
+    height: 20mm;
+    display: inline-block;
+    vertical-align: middle;
+    image-rendering: pixelated;
+}
+
+.label {
+    font-family: Arial, Verdana, Helvetica, sans;
+    font-weight: regular;
+    vertical-align: middle;
+    display: inline-block;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: scroll;
+    width: 70mm;
+    /* font-size: 7px; */
+}
+
+
+.container {
+    display:inline-block;
+    width: 100%;
+  }
+  .column {
+    /* display:inline-block; */
+    padding: 7px;
+    box-sizing: border-box;
+  }
+
+  .clearfix::after {
+    content: "";
+    clear: both;
+  }

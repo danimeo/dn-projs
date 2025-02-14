@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 加载ONNX.js -->
+    <script src="https://cdn.jsdelivr.net/npm/onnxjs/dist/onnx.min.js"></script>
+</head>
+<body>
+    <script>
+        async function runInference() {
+            const session = new onnx.InferenceSession();
+            await session.loadModel('/path/to/your-model.onnx');
+            
+            let inferenceInputs = {}; // 根据您的模型准备输入数据
+            const output = await session.run(inferenceInputs);
+            console.log('模型输出:', output.values().next().value);
+        }
+        runInference();
+    </script>
+</body>
+</html>

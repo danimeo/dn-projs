@@ -1,0 +1,39 @@
+finish
+/title, Dajun
+/prep7
+blc4, 0, 0, 1, 0.2
+cyl4, 0.1, 0.1, 0.025
+cyl4, 0.2142857142857143, 0.1, 0.025
+cyl4, 0.3285714285714286, 0.1, 0.025
+cyl4, 0.44285714285714284, 0.1, 0.025
+cyl4, 0.5571428571428572, 0.1, 0.025
+cyl4, 0.6714285714285715, 0.1, 0.025
+cyl4, 0.7857142857142857, 0.1, 0.025
+cyl4, 0.9, 0.1, 0.025
+asba, 1, ALL
+vext, ALL, 0, 0, 0, 0, 0.1
+et, 1, SOLID186
+vsweep, ALL
+esize, 0.1
+nropt, FULL
+ekill, 1
+esel, s, LIVE
+ekill, 2
+esel, s, LIVE
+ekill, 3
+esel, s, LIVE
+ekill, 4
+esel, s, LIVE
+ekill, 5
+esel, s, LIVE
+ekill, 6
+esel, s, LIVE
+ekill, 7
+esel, s, LIVE
+ekill, 8
+esel, s, LIVE
+ekill, 9
+esel, s, LIVE
+ekill, 10
+esel, s, LIVE
+eplot, 

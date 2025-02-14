@@ -1,0 +1,46 @@
+<!-- <div>
+    <div style="display:inline-block;">
+        <img src="{{label_tools.qr_code(sample1_id)}}" />
+        <span class='label'>
+            {{ sample1_name }} <br />
+            <br />
+            {{ label_tools.now() }}
+        </span>
+    </div>
+    <div style="display:inline-block;margin-left:10px;">
+        <img src="{{label_tools.qr_code(sample2_id)}}" />
+        <span class='label'>
+            {{ sample2_name }} <br />
+            <br />
+            {{ label_tools.now() }}
+        </span>
+    </div>
+</div> -->
+
+<div class="container">
+    <div class="column">
+        <img src="{{label_tools.qr_code(sample1_id)}}" />
+        <span class='label'>
+            <span style="font-size: {{ size_name }}px;">
+                {{ sample1_name }}
+            </span>
+            <br />
+            <span style="font-size: {{ size_date }}px;">
+                {{ label_tools.now() }}
+            </span>
+        </span>
+
+    </div>
+    <div class="column">
+        <img src="{{label_tools.qr_code(sample2_id)}}" />
+        <span class='label'>
+            <span style="font-size: {{ size_name }}px;">
+                {{ sample2_name }}
+            </span>
+            <br />
+            <span style="font-size: {{ size_date }}px;">
+                {{ label_tools.now() }}
+            </span>
+        </span>
+    </div>
+</div>

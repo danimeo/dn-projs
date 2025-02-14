@@ -1,0 +1,70 @@
+# coding:utf8
+
+"""
+    本模块讲述如何使用sounddevice库, 对声卡的ASIO驱动进行调用, 进行播放, 录音操作
+
+    使用ASIO驱动的好处:
+        1. 延迟低, 就是时延小, 播放录音操作过程中的软硬件时延;
+        2. 通道个数多(是MME, WDM-KS 等驱动的两倍数量, 因为ASIO可以控制单个插孔)
+
+    本机使用了 FireFace 802 系列的声卡, 支持 ASIO 驱动
+    https://www.rme-audio.com/home.html
+
+"""
+
+import os
+import sounddevice as sd
+import soundfile
+
+test_wav_file_path = r"F:\sounddevice_test_wav\wav_test\张杰 - 往事随风.wav"
+
+data_array, sample_rate = soundfile.read(test_wav_file_path)
+
+# 初始化一个录音文件路径
+rec_file_path = os.path.join(os.path.abspath(os.path.join(os.getcwd(), os.path.pardir)),
+                             "sounddevice_test_wav", "rec_files", "rec_1.wav")
+
+# 使用ASIO播放
+# 第一步, 找到 ASIO 总的唯一id.
+# 就是通过 python -m sounddevice 查询出来的信息中--最左侧的数字, 当然是对应 ASIO 那个驱动, 有且只有一个;
+# 前提是你的电脑连接的声卡支持ASIO驱动, 本机用的是 FireFace 802 系列
+# 比如: 48 ASIO .....
+
+asio_top_only_one_id = 48  # 这里, 我先假设, 当前电脑连接了有ASIO驱动的声卡(比如 FireFace 802系列), 其ASIO驱动是48索引
+
+# 下面这两个id ---> 举个例子:  "Analog 1" 对应的id是 0;   "Analog 2" 对应的id是 1
+asio_single_channel_id_1 = 0  # 相当于使用了 Analog 1 这个通道,  也就是 FireFace 802 声卡硬件后侧的编号为1的插口
+asio_single_channel_id_2 = 1  # 相当于使用了 Analog 2 这个通道,  也就是 FireFace 802 声卡硬件后侧的编号为2的插口
+
+# 要想使用 sounddevice 调用 ASIO 驱动, 就需要按照下边设置一下
+asio_in = sd.AsioSettings(channel_selectors=[asio_single_channel_id_1])
+asio_out = sd.AsioSettings(channel_selectors=[asio_single_channel_id_2])
+
+# 播放方式一
+sd.default.extra_settings = None, asio_out  # 单独播放, 就只用配置一个输出id
+sd.default.device[1] = asio_top_only_one_id  # 这里要配置ASIO唯一那个索引id, 本机是48
+sd.play(data_array, blocking=True, samplerate=sample_rate, mapping=None)
+
+# 播放方式二
+sd.default.device[1] = asio_top_only_one_id  # 这里要配置ASIO唯一那个索引id, 本机是48
+sd.play(data_array, blocking=True, samplerate=sample_rate, mapping=None, extra_settings=(None, asio_out))
+
+# 录音方式一
+sd.default.extra_settings = asio_in, None  # 单独录制, 就只用配置一个输入id
+sd.default.device[0] = asio_top_only_one_id  # 这里要配置ASIO唯一那个大id, 本机是48
+res_data_array_1 = sd.rec(frames=48000 * 30, samplerate=48000, channels=1, mapping=None, blocking=True)
+
+# 录音方式二
+sd.default.device[0] = asio_top_only_one_id  # 这里要配置ASIO唯一那个大id, 本机是48
+res_data_array_2 = sd.rec(frames=48000 * 30, samplerate=48000, channels=1, mapping=None, blocking=True,
+                          extra_settings=(asio_in, None))
+
+# 如果是边录边播, 需要设置两个
+sd.default.extra_settings = asio_in, asio_out
+sd.default.device[0] = asio_top_only_one_id
+sd.default.device[1] = asio_top_only_one_id
+res_data_array = sd.playrec(data_array, samplerate=sample_rate, blocking=True,
+                            input_mapping=None, output_mapping=None, channels=2)
+
+soundfile.write(rec_file_path, res_data_array, samplerate=sample_rate, subtype="PCM_16")
+

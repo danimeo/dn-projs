@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="./index.js"></script> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas {
+            margin: 50px auto 0;
+            display: block;
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="400" height="400">
+        此浏览器不支持canvas
+    </canvas>
+    <script>
+        const ctx = document.getElementById('canvas');
+        const gl = ctx.getContext('webgl');
+
+        // 着色器
+        // 创建着色器源码
+
+        // 顶点着色器
+        const VERTEX_SHADER_SOURCE = `
+            // 存储限定符 类型 变量名 分号 (注: attribute 只传递顶点数据)
+            attribute vec4 aPosition;
+            void main() {
+                gl_Position = aPosition; // vec4(0.0,0.0,0.0,1.0)
+                gl_PointSize = 10.0; // 点的大小
+            }
+        `;
+
+        // 片元着色器
+        const FRAGMENT_SHADER_SOURCE = `
+            void main() {
+                // r g b a 绘制颜色
+                gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+            }
+        `
+
+        function initShader(gl, VERTEX_SHADER_SOURCE, FRAGMENT_SHADER_SOURCE) {
+            // 创建着色器
+            const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+            const fragmentSharder = gl.createShader(gl.FRAGMENT_SHADER);
+
+            gl.shaderSource(vertexShader, VERTEX_SHADER_SOURCE) // 指定顶点着色器的源码
+            gl.shaderSource(fragmentSharder, FRAGMENT_SHADER_SOURCE) // 指定片元着色器的源码
+
+            // 编译着色器
+            gl.compileShader(vertexShader);
+            gl.compileShader(fragmentSharder);
+
+            // 创建一个程序对象，用于关联JavaScript和WebGL
+            const program = gl.createProgram();
+
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentSharder);
+
+            gl.linkProgram(program);
+            gl.useProgram(program);
+
+            return program;
+        }
+
+        const program = initShader(gl, VERTEX_SHADER_SOURCE, FRAGMENT_SHADER_SOURCE);
+
+        // 获取 attribute 变量，返回变量的存储地址
+        const aPosition = gl.getAttribLocation(program, 'aPosition');
+
+        // var points = [];
+        var clickX = 0;
+        var clickY = 0;
+
+
+        function xyTrans(x, y){
+
+            // 坐标
+            console.log("鼠标点击的屏幕坐标：", x, y);
+
+            // 获取边距 (上边距和左边距) domPosition.left 等同于 ctx.offsetLeft 的值
+            const domPosition = event.target.getBoundingClientRect();
+            console.log("画布边距：", domPosition.left, domPosition.top);
+
+            // 点击的点位于画布上方 、 左侧的距离 (domPosition.left: 568(基于我显示屏的长度), domPosition.top: 50)
+            const domx = x - domPosition.left;
+            const domy = y - domPosition.top;
+            console.log("画布的坐标：", domx, domy);
+
+            // 固定值，画布长和宽的一半，均为200
+            const halfWidth = ctx.offsetWidth / 2;
+            const halfHeight = ctx.offsetHeight / 2;
+            console.log("画布长和宽的一半：", halfWidth, halfHeight);
+
+            // 转为 ndc坐标 (-1, 1)
+            const clickX = (domx - halfWidth) / halfWidth;
+            const clickY = (halfHeight - domy) / halfHeight;
+
+            console.log("转为ndc的坐标：", clickX, clickY);
+
+            return [clickX, clickY];
+        }
+
+
+        ctx.onclick = function (event) {
+            [clickX, clickY] = xyTrans(event.clientX, event.clientY);
+            
+            
+            // 获取对应数据索引
+            const vertexPos = gl.getAttribLocation(program, "aPosition");
+            // 解析顶点数据
+            gl.vertexAttribPointer(vertexPos, 3, gl.FLOAT, false, 0, 0);
+            // 启用顶点属性，顶点属性默认是禁用的。
+            gl.enableVertexAttribArray(vertexPos);
+            // 激活着色器
+            gl.useProgram(program);
+            // 绘制
+            gl.drawArrays(gl.LINE_STRIP, 0, 2);
+        }
+
+        ctx.onmousemove = function (event) {
+            // if (points.length > 10) {
+            //     delete points[points.length - 1];
+            //     // gl.clearColor(0.0, 0.0, 0.0, 1.0);
+            //     // gl.clear(gl.COLOR_BUFFER_BIT);
+            // }
+            // points.push({clickX: event.clientX, clickY: event.clientY});
+            [clickX, clickY] = xyTrans(event.clientX, event.clientY);
+            // console.log("鼠标移动的屏幕坐标：", clickX, clickY);
+            // for (let i = 0; i < points.length; i++) {
+            // console.log(points[points.length - 1]);
+            gl.vertexAttrib2f(aPosition, clickX, clickY);
+            gl.drawArrays(gl.POINTS, 0, 1);
+
+            // }
+        }
+    </script>
+</body>
+</html>

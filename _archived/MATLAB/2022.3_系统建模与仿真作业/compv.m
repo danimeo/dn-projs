@@ -1,0 +1,12 @@
+function x  = compv(u)
+%u(1) = w2
+%u(2) = theta2
+%u(3) = theta3
+a=zeros(2,2);
+b=zeros(2,1);
+x=zeros(2,1);
+r2 = 15;
+r3 = 55 ; %连杆 2、 3 的长度
+a=[r3*sin(u(3)) 1; -r3*cos(u(3)) 0]; %求解运动学方程
+b=[-r2*u(1)*sin(u(2)); r2*u(1)*cos(u(2))];
+x=inv(a)*b;

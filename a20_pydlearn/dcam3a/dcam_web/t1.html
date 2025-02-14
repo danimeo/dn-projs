@@ -1,0 +1,50 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Title</title>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .v-enter-active,
+        .v-leave-active {
+          transition: opacity 0.5s ease;
+        }
+        
+        .v-enter-from,
+        .v-leave-to {
+          opacity: 0;
+        }
+        </style>
+</head>
+
+<body>
+
+    <div id="app">{{ message }}</div>
+        <script setup>
+            import { ref } from 'vue'
+            
+            const show = ref(true)
+            </script>
+    <button @click="show = !show">Toggle</button>
+    <Transition>
+      <p v-if="show">hello</p>
+    </Transition>
+
+    <script>
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+                const message = ref('Hello vue!')
+                return {
+                    message
+                }
+            }
+        }).mount('#app')
+    </script>
+    
+</body>
+
+</html>

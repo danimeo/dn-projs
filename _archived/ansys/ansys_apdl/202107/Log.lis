@@ -1,0 +1,47 @@
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE 2021 R1           BUILD 21.1      UP20201109       00:51:35
+!*  
+/PREP7  
+/prep7  
+et,1,plane42
+et,2,solid45
+et,3,solidd45   
+FINISH  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE 2021 R1           BUILD 21.1      UP20201109       00:53:34
+!*  
+/INPUT,'1','txt','B:\math_sci_proj\ansys\ansys_apdl\202107\batch1\',, 0 
+/COM,ANSYS RELEASE 2021 R1           BUILD 21.1      UP20201109       00:54:07
+/INPUT,'1','txt','B:\math_sci_proj\ansys\ansys_apdl\202107\batch1\',, 0 
+/COM,ANSYS RELEASE 2021 R1           BUILD 21.1      UP20201109       00:54:40
+/INPUT,'1','txt','B:\math_sci_proj\ansys\ansys_apdl\202107\batch1\',, 0 
+/COM,ANSYS RELEASE 2021 R1           BUILD 21.1      UP20201109       00:54:52
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE 2021 R1           BUILD 21.1      UP20201109       00:54:59
+/INPUT,'1','txt','B:\math_sci_proj\ansys\ansys_apdl\202107\batch1\',, 0 
+/COM,ANSYS RELEASE 2021 R1           BUILD 21.1      UP20201109       00:55:47
+/INPUT,'1','txt','B:\math_sci_proj\ansys\ansys_apdl\202107\batch1\',, 0 
+/COM,ANSYS RELEASE 2021 R1           BUILD 21.1      UP20201109       00:55:57
+FINISH  
+! /EXIT,NOSAV   
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE 2021 R1           BUILD 21.1      UP20201109       00:58:23
+/REPLOT,RESIZE  
+/CLEAR,NOSTART  
+/COM,ANSYS RELEASE 2021 R1           BUILD 21.1      UP20201109       00:59:00
+/INPUT,'1','txt','B:\math_sci_proj\ansys\ansys_apdl\202107\batch1\',, 0 
+/COM,ANSYS RELEASE 2021 R1           BUILD 21.1      UP20201109       00:59:07
+/INPUT,'1','txt','B:\math_sci_proj\ansys\ansys_apdl\202107\batch1\',, 0 
+/COM,ANSYS RELEASE 2021 R1           BUILD 21.1      UP20201109       00:59:16
+/CLEAR,START
+/COM,ANSYS RELEASE 2021 R1           BUILD 21.1      UP20201109       00:59:18
+/input,start,ans,'C:\Program Files\ANSYS Inc\v211\ANSYS\apdl\'  
+FINISH  
+! /EXIT,NOSAV   
+/input,start,ans,'C:\Program Files\ANSYS Inc\v211\ANSYS\apdl\'  
+FINISH  
+! /EXIT,NOSAV   
+/GRAPHICS,FULL  
+/GRAPHICS,POWER 
+

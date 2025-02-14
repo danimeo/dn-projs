@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Title</title>
+        <!-- 新 Bootstrap5 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+ 
+<!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.net/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    
+<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+</head>
+    <body>
+
+
+
+
+<script>
+function getData() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    
+    if (this.readyState == 4 && this.status == 200) {
+      var text = this.responseText;
+      // document.getElementById("demo").innerHTML = text;
+
+      var box = document.getElementById("box");
+      var p1 = document.createElement('p');
+      var h1 = document.createElement('button');
+
+      p1.appendChild(h1)
+      h1.setAttribute('class', 'btn');
+      h1.setAttribute('id', 'ti');
+      h1.innerText = text;
+      box.appendChild(p1);
+    }
+  };
+  xhttp.open("GET", "http://localhost:8215/now", true);
+  xhttp.send();
+
+
+} 
+function removeItem() {
+  var box = document.getElementById("box");
+  var listItems = box.childNodes
+  var last = listItems[listItems.length - 1];
+  last.parentNode.removeChild(last);
+} 
+</script>
+
+<div id="demo"><h2>DCAM3-Timer 时间分配计时器</h2></div>
+<div id="box">
+<!-- <span id="span1">111</span> -->
+</div>
+
+<button type="button" id="btn1" class="btn btn-primary" onclick="getData()">获取时间</button>
+
+<button type="button" class="btn btn-danger" onclick="removeItem()">删除</button>
+
+<br>
+
+<!-- <button type="button" class="btn">基本按钮p</button>
+<button type="button" class="btn btn-secondary">次要按钮</button>
+<button type="button" class="btn btn-success">成功</button>
+<button type="button" class="btn btn-info">信息</button>
+<button type="button" class="btn btn-warning">警告</button>
+<button type="button" class="btn btn-dark">黑色</button>
+<button type="button" class="btn btn-light">浅色</button>
+<button type="button" class="btn btn-link">链接</button> -->
+
+
+</body>
+</html>

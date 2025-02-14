@@ -1,0 +1,30 @@
+# Project: ReaperRemoteMMAP
+# Makefile created by Dev-C++ 5.15
+
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
+WINDRES  = windres.exe
+OBJ      = ReaperRemoteMMAP/dllmain.o
+LINKOBJ  = ReaperRemoteMMAP/dllmain.o
+LIBS     = -L"C:/mingw64/lib" -L"C:/Python/Python27/libs" -static-libgcc -Wl,-Bstatic -lwinpthread -Wl,-Bdynamic -lgmon -pg -g3
+INCS     = -I"C:/mingw64/include" -I"C:/music_dev/reaper-sdk-main/sdk" -I"C:/Python/Python27/include"
+CXXINCS  = -I"C:/mingw64/include" -I"C:/music_dev/WDL/WDL" -I"C:/music_dev/reaper-sdk-main/sdk"
+BIN      = ReaperRemoteMMAP.dll
+CXXFLAGS = $(CXXINCS) -pg -g3 -DBUILDING_DLL=1
+CFLAGS   = $(INCS) -pg -g3 -DBUILDING_DLL=1
+RM       = del /q
+DEF      = libReaperRemoteMMAP.def
+STATIC   = libReaperRemoteMMAP.a
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN) $(DEF) $(STATIC)
+
+$(BIN): $(LINKOBJ)
+	$(CC) -shared $(LINKOBJ) -o $(BIN) $(LIBS) -Wl,--output-def,$(DEF),--out-implib,$(STATIC),--add-stdcall-alias
+
+ReaperRemoteMMAP/dllmain.o: ReaperRemoteMMAP/dllmain.c
+	$(CC) -c ReaperRemoteMMAP/dllmain.c -o ReaperRemoteMMAP/dllmain.o $(CFLAGS)

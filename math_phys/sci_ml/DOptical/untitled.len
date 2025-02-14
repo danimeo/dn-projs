@@ -1,0 +1,43 @@
+// OSLO 6.2 12294     0 50466
+LEN NEW "No name" -164.71 7
+EBR  5.0
+ANG  2.5
+DES  "OSLO"
+UNI  1.0
+// SRF 0
+AIR 
+TH   100.0
+AP  4.3660942908512
+DRW ON
+NXT  // SRF 1
+GLA PSK52     
+RD   -35.58
+TH   8.73
+NXT  // SRF 2
+AIR 
+RD   -65.32
+TH   29.25
+NXT  // SRF 3
+GLA BAF3      
+RD   51.24
+TH   6.13
+NXT  // SRF 4
+AIR 
+RD   69.3
+TH   42.95
+NXT  // SRF 5
+GLA BAF3      
+RD   -64.31
+TH   7.6
+NXT  // SRF 6
+AIR 
+RD   -91.9
+TH   24.95
+NXT  // SRF 7
+AIR 
+DRW ON
+CBK  1
+WV 0.58756 0.48613 0.65627
+WW 1.0 1.0 1.0
+END  7
+DLRS 3

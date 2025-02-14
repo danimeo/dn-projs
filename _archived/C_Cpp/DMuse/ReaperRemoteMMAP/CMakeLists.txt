@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.19)
+project(ReaperRemoteMMAP C)
+
+set(CMAKE_C_STANDARD 99)
+
+# add_executable(ReaperRemoteMMAP main.c)
+
+SET (LIBHELLO_SRC ./dllmain.c)
+ADD_LIBRARY (ReaperRemoteMMAP SHARED ${LIBHELLO_SRC})
+INSTALL(TARGETS ReaperRemoteMMAP RUNTIME DESTINATION .)
+SET_TARGET_PROPERTIES(ReaperRemoteMMAP PROPERTIES LINKER_LANGUAGE C)

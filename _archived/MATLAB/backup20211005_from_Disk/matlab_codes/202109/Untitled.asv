@@ -1,0 +1,6 @@
+syms x y;
+tic;
+y = sin(x) + x / exp(x);
+d = diff(y, x);
+disp(d);
+toc

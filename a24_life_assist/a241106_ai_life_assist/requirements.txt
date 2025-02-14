@@ -1,0 +1,6 @@
+qwen_vl_utils
+modelscope
+transformers
+autoawq
+flash-attn
+# torch==2.3.1

@@ -1,0 +1,4 @@
+finish
+/clear,start
+!/title,'Dajun's first APDL script'
+finish

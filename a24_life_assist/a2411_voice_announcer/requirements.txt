@@ -1,0 +1,5 @@
+pytz
+pyaudio
+
+optimum
+auto-gptq

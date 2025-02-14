@@ -1,0 +1,28 @@
+clc; clear all; close all
+
+X = (1:8)' * 5;
+Y = [1.27 2.16 2.86 3.44 3.87 4.15 4.37 4.51]' * 1e-4;
+
+x = sym('x',[1 length(X)]);
+
+phi = @(x, n) x .^ n;
+
+A = cell2sym(arrayfun(@(x) phi(x,0:3), x, 'UniformOutput', false));
+A = reshape(A, 4, length(X))';
+
+B = A' * A;
+
+b = A' * Y;
+
+a = eval(subs(B, x, X')) \ eval(subs(b, x, X'));
+
+disp(subs(B, x, X'))
+disp(subs(b, x, X'))
+disp(vpa(a))
+
+x0 = sym('x');
+y = vpa(sum(a' .* phi(x0, 0:3)))
+
+% fplot(y)
+% hold on
+% plot(T, Y, 'ro')

@@ -1,0 +1,29 @@
+# Project: 项目 2
+# Makefile created by Dev-C++ 5.15
+
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
+WINDRES  = windres.exe
+OBJ      = test1.o
+LINKOBJ  = test1.o
+LIBS     = -L"C:/mingw64/lib" --static-libgcc -Wl,-Bstatic -lwinpthread -Wl,-Bdynamic -lgmon -pg -g3
+INCS     = -I"C:/mingw64/include"
+CXXINCS  = -I"C:/mingw64/include"
+BIN      = "项目 2.a"
+CXXFLAGS = $(CXXINCS) -std=c99 -pg -g3
+CFLAGS   = $(INCS) -std=c99 -pg -g3
+RM       = del /q
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(LINKOBJ)
+	ar r $(BIN) $(LINKOBJ)
+	ranlib $(BIN)
+
+test1.o: test1.c
+	$(CC) -c test1.c -o test1.o $(CFLAGS)
