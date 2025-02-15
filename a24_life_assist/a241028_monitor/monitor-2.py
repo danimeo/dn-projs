@@ -93,12 +93,12 @@ def audio_upload():
         local_file_path = '{}/{}'.format(dir_path, filename)
         
         record(local_file_path)
-        upload_file(local_file_path, filename, now, dir_prefix=f'{monitor_node_name}/audio/')
+        upload_file(bucket, local_file_path, filename, now, dir_prefix=f'{monitor_node_name}/audio/')
 
         time.sleep(rec_interval)
 
 
-def upload_file(local_file_path, filename, now, dir_prefix=''):
+def upload_file(bucket, local_file_path, filename, now, dir_prefix=''):
     if os.path.exists(local_file_path):
         s3_file_key = '{}{}/{}/{}/{}/{}'.format(dir_prefix, now.year, now.month, now.day, now.hour, filename)
         print(local_file_path, bucket, s3_file_key)
@@ -178,7 +178,7 @@ def upload():
         image_data = img_encoded.tobytes()
 
         print(local_file_path, filename, now, f'{monitor_node_name}/')
-        upload_file(local_file_path, filename, now, dir_prefix=f'{monitor_node_name}/')
+        upload_file(bucket, local_file_path, filename, now, dir_prefix=f'{monitor_node_name}/')
 
         if os.path.exists(local_file_path):
             os.remove(local_file_path)
