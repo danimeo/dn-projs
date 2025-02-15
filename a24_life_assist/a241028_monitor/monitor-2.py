@@ -102,9 +102,13 @@ def upload_file(local_file_path, filename, now, dir_prefix=''):
     if os.path.exists(local_file_path):
         s3_file_key = '{}{}/{}/{}/{}/{}'.format(dir_prefix, now.year, now.month, now.day, now.hour, filename)
         print(local_file_path, bucket, s3_file_key)
-        s3.upload_file(local_file_path, bucket, s3_file_key)
+        # s3.upload_file(local_file_path, bucket, s3_file_key)
+        with open(local_file_path, "rb") as f:
+            s3.upload_fileobj(f, bucket, s3_file_key)
         s3_file_key = '{}{}/{}/{}/{}/{}'.format(dir_prefix, now.year, now.month, now.day, now.hour, 'latest.' + filename.split('.')[-1])
-        s3.upload_file(local_file_path, bucket, s3_file_key)
+        # s3.upload_file(local_file_path, bucket, s3_file_key)
+        with open(local_file_path, "rb") as f:
+            s3.upload_fileobj(f, bucket, s3_file_key)
         print(f'Successfully uploaded {filename}')
         os.remove(local_file_path)
     else:
