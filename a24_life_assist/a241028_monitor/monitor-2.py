@@ -239,7 +239,7 @@ if __name__ == '__main__':
     repo_path, ak_dir_path = get_paths()
     font_path = os.path.join(repo_path, r'assets/fonts/YaHei_Consolas_Hybrid_1.12.ttf')
     print('font_path:', font_path)
-    ak_csv_path = os.path.join(ak_dir_path, 'aliyun-oss-1.csv.key')
+    ak_csv_path = os.path.join(ak_dir_path, 'aliyun-rv1126-1.csv.key')
     access_key, secret_key = read_ak_from_csv(ak_csv_path, id_ev_key='ALIYUN_AK_ID', secret_ev_key='ALIYUN_AK_SECRET')
 
     os.system('ntpdate cn.pool.ntp.org')
