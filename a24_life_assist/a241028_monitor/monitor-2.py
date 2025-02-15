@@ -211,7 +211,7 @@ if __name__ == '__main__':
     bucket = 'danim-monitors'
     endpoint_url = 'https://{}.oss-cn-heyuan.aliyuncs.com'.format(bucket)
     # local_dir_path = '/home/nano/.cache'
-    local_dir_path = '~/.cache'
+    local_dir_path = '.cache'
     # secret_key = input('Paste secret:')
 
     def get_paths():
