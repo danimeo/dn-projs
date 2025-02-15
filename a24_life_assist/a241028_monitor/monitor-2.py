@@ -232,7 +232,7 @@ if __name__ == '__main__':
         return ak_id, secret
     
     repo_path, ak_dir_path = get_paths()
-    font_path = os.path.join(repo_path, r'assets/fonts/YaHei Consolas Hybrid 1.12.ttf')
+    font_path = os.path.join(repo_path, r'assets/fonts/YaHei_Consolas_Hybrid_1.12.ttf')
     print('font_path:', font_path)
     ak_csv_path = os.path.join(ak_dir_path, 'aliyun-oss-1.csv.key')
     access_key, secret_key = read_ak_from_csv(ak_csv_path, id_ev_key='ALIYUN_AK_ID', secret_ev_key='ALIYUN_AK_SECRET')
@@ -245,7 +245,7 @@ if __name__ == '__main__':
                     endpoint_url=endpoint_url,
                     aws_access_key_id=access_key,
                     aws_secret_access_key=secret_key,
-                    verify=False)  # 如果不需要SSL验证，可以设置verify=False，即http或者https
+                    verify=True)  # 如果不需要SSL验证，可以设置verify=False，即http或者https
     
     # upload_thread = Thread(target=audio_upload)
     # upload_thread.start()

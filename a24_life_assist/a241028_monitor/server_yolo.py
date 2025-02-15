@@ -248,7 +248,7 @@ if __name__ == '__main__':
                     endpoint_url=endpoint_url,
                     aws_access_key_id=access_key,
                     aws_secret_access_key=secret_key,
-                    verify=False)  # 如果不需要SSL验证，可以设置verify=False，即http或者https
+                    verify=True)  # 如果不需要SSL验证，可以设置verify=False，即http或者https
     
     # upload_thread = Thread(target=audio_upload)
     # upload_thread.start()
